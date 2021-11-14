@@ -1,16 +1,26 @@
 #include <MHZ19.h>
 MHZ19 mhz(&Serial1); // library can be found at: https://github.com/strange-v/MHZ19
 #include <Adafruit_NeoPixel.h>
+#include <Wire.h>
+#include <Adafruit_GFX.h>
+#include <Adafruit_SSD1306.h>
+#include "RunningAverage.h"
 
 #define pixelpin 8
 #define serial_rx 7
 #define serial_tx 6
-#define spiezopin 5
-#define piezopin 4
+#define spiezopin 3
+#define piezopin 2
 MHZ19_RESULT response;
+#define SCREEN_WIDTH 128 // OLED display width, in pixels
+#define SCREEN_HEIGHT 32
 
 #define nr_of_pixels 1
 Adafruit_NeoPixel pixel(nr_of_pixels, pixelpin, NEO_GRB + NEO_KHZ800);
+Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1);
+
+RunningAverage RA(1800); //30min * 60s
+RunningAverage RA2(300);
 
 void setup() {
   pixel.begin();
@@ -18,6 +28,15 @@ void setup() {
   pixel.setBrightness(225);
   Serial.begin(115200);
   Serial1.begin(9600);
+  display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
+  display.clearDisplay();
+  display.setTextSize(3);
+  display.setTextColor(SSD1306_WHITE);
+  display.setCursor(25, 10);
+  display.print(F("Tjilp"));
+  display.display();
+  RA.clear();
+  RA2.clear();
   pixel.fill(pixel.Color(80, 80, 80)); pixel.show();
   chirp(HIGH);
   response = mhz.retrieveData();
@@ -33,7 +52,7 @@ void silent_mode() {
 }
 
 void loop() {
-  for (int t = 0; t < random(30, 300); t++) {
+  for (int t = 0; t < random(45, 750); t++) {
     // We take a reading every sec
     response = mhz.retrieveData();
     while (response != MHZ19_RESULT_OK) {
@@ -42,8 +61,44 @@ void loop() {
       response = mhz.retrieveData();
     }
     int co2 = mhz.getCO2();
+    RA.addValue(co2);
+    RA2.addValue(co2);
     Serial.print(F("CO2: "));
     Serial.print(co2);
+
+    display.clearDisplay();
+    
+
+    display.setTextSize(2);
+    display.setCursor(5, 1);
+    display.print(co2);
+    display.setTextSize(1);
+    display.print("now");
+    
+    display.setTextSize(2);
+    display.setCursor(65, 18);
+    display.print(RA.getMaxInBuffer(), 0);
+    display.setTextSize(1);
+    display.print("max");
+
+    display.setTextSize(1);
+    
+    display.setCursor(5, 24);
+    display.print(RA.getAverage(), 0);
+    display.print(" avg");
+
+
+    display.setCursor(72, 3);
+    if (RA2.getAverage() > RA.getAverage()) {
+      display.print("+");
+    } else {
+      display.print("-");
+    }
+    display.print(RA2.getStandardDeviation(), 0);
+    display.print(" std");
+
+    //display.drawRect(0, 0, 128, 32, SSD1306_WHITE);
+    display.display();
 
     int R = map(co2, 200, 2000, 0, 255);
     int G = map(co2, 200, 2000, 255, 0);
@@ -79,7 +134,7 @@ void loop() {
       delay(1000);
     }
   }
-  chirp(LOW);
+  //chirp(LOW);
 }
 
 void chirp(boolean volume) {
