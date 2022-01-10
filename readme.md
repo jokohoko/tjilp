@@ -20,20 +20,25 @@ The design uses:
 - An MH-Z19b module (a fairly precise and easy to use Arduino compatible co2 sensor).
 - A neopixel (ws2812b) piece of led strip.
 - A piezo buzzer (both active and passive would work, but active ones would be adviced).
-- And optionally a usb port to plug it straight into a power bank
+- A usb-C connector to connect it to a powerbank or wall adapter.
 
 Power must be provided through the usb-c cable or the usb plug.
 Exact measurements can be obtained with a usb cable to a computer or with a usb-c cable to an android smartphone.
 
-- There is the option to have a version with a male usb connector next to the usb-c connector of the Arduino to plug into a power bank. For this version you glue the usb connector into place with hot melt adhesive.
-- In the schematics the usb socket is thus optional, as well as the resistor to the buzzer. Using this resistor you obtain two sound levels from the buzzer. Soft chirps and louder alarms. But you can also connect both to the buzzer without a resistor to have both in high volume. The value of the resistor is around 220 ohm in our device. But you may want a higher value to reduce the volume further.
+> Additions in this branch of the development:
+> - This version has an Oled display to visualise the actual value of the Co2 sensor.
+> - It also features a touch "bolt" so you can give feedback to the device. It is used for:
+> -- Silencing Tjilp as soon as you have taken measures. This comforts the Tjilp and silences it untill the values have dropped again or raised to the next treshold.
+> -- Resetting the maximal CO2 level shown on the display. Hold the button for 10sec and Tjilp will confirm by tjilping.
+
+- In the schematics the resistor to the buzzer is optional. Using this resistor you obtain two sound levels from the buzzer. Soft chirps and louder alarms. But you can also connect both to the buzzer without a resistor to have both in high volume. The value of the resistor is around 220 ohm in our device. But you may want a higher value to reduce the volume further.
 - To print the front cover, we provide two print files. First you print the logo part in a darker colour. Then you swap filament and print the cover over logo file with a transparent like filament over the logo. This is a hack method of doing multi-material prints on a regular Prusa.
 
 [![Tjilp demo video](https://img.youtube.com/vi/Ra5aq8gwuik/0.jpg)](https://www.youtube.com/watch?v=Ra5aq8gwuik)
 
 ## Notes!:
 ### Calibration: 
-The sensor calibrates itself whilst being operational. Thus you must leave the device powered at all times if possible. When you disconnect the power it will take at least 30min to recalibrate.
+The sensor calibrates itself whilst being operational. Thus you must leave the device powered at all times if possible. When you disconnect the power it will take at least 30min up to a day to recalibrate.
 ### Placement:
 The sensor works best when placed central in the room but not too close to humans exhaling. Thus we advise about a meter from humans and not resting flat against a wall or table. That is why Tjilp is designed to be placed on top of a powerbank and stand upright or be lifted off the table by the thickness of the powerbank.
 ### Cost:
@@ -49,7 +54,8 @@ To our regret we cannot do this as we are a University and not allowed commercia
 ## Shopping list:
 Part|Price|Qtd.|Url
 ---|---|---|---
-Xiao (main controller)|€ 6.5|1|https://www.tinytronics.nl/shop/nl/platforms/seeed-studio/seeed-studio-seeeduino-xiao-cortex-m0-samd21
+Xiao (main controller)|€ 6.5|1|https://www.tinytronics.nl/shop/nl/development-boards/microcontroller-boards/overige/seeed-studio-seeeduino-xiao-cortex-m0-samd21-losse-headers
+Oled scherm|€ 6.5|1|https://www.tinytronics.nl/shop/nl/displays/oled/0.91-inch-oled-display-128*32-pixels-wit-i2c
 MH-Z19B (Co2 sensor)|€ 20.0|1|https://www.tinytronics.nl/shop/nl/sensoren/temperatuur-lucht-vochtigheid/winsen-mh-z19b-co2-sensor-met-kabel
 Passive Buzzer|€ 0.3|1|https://www.tinytronics.nl/shop/nl/audio/speakers/passieve-buzzer-3-12v-ac-2khz
 LED strip*|€ 12.0 of €0.2/st|1|https://www.tinytronics.nl/shop/nl/verlichting/led-strips/led-strips/ws2812b-digitale-5050-rgb-led-strip-60-leds-1m
@@ -98,10 +104,14 @@ Het ontwerp gebruikt:
 - Een MH-Z19b module (een behoorlijk accurate, goedkope en eenvoudig te gebruiken CO2 sensor).
 - Een Neopixel (ws2812b) om licht te geven.
 - Een piezo buzzer (actief of passief werken beiden, maar een passieve het beste).
-- Optioneel een usb poort om het toestel direct in een powerbank te pluggen.
-- Of via een usb-c kabel naar een powerbank, adapter of gsm of laptop.
+- Een usb-c kabel naar een powerbank, adapter of gsm of laptop.
 
-- Indien je opteert voor de versie met usb poort zal je die op zijn plaats moeten lijmen met smeltlijm. 
+> Toevoegingen in deze tak van de ontwikkeling:
+> - Deze versie heeft een Oled scherm waarop de actuele waarde van de sensor is af te lezen.
+> - Het heeft een aanraakgevoelige "bout" zodat je feedback kan geven aan het device. We gebruiken het om:
+> -- Tjilp te troosten zodra hij in alarm is. Dit dempt het geluid tot oftewel de waarden effectief zijn gezakt of de waarden verder zijn gestegen over de hoge treshold limiet. 
+> -- Om de maximale gemete waarde te resetten. Hou je vinger op de bout voor ongeveer 10 seconden en de maximale waarde reset zichzelf.
+
 - In het schema staat een weerstandje voorzien naar de buzzer. Hiermee krijgt Tjilp 2 geluidsvolumes. Indien je alleen maar luid volume wenst kan je ook beide uitgangen samen verbinden met de buzzer. De aangeraden 220 ohm weerstand is voor onze units de beste waarde gebleken. Maar deze kan hoger of lager gekozen worden om stiller dan wel luider volume te krijgen.
 - Om de cover te printen voorzien we 2 print files. Hiermee kan je het logo op de voorkant donkerder printen. Laad daarvoor eerst de donkere kleur in de printer. Print het logo. Wissel van filament naar de lichtere kleur. En print daarmee het 2de bestand over het logo heen. Doordat het logo slechts 0.2mm hoog is kan dit zonder problemen en dit is de goedkope manier om multi-material prints te doen op een gewone 3D printer.
 
@@ -109,7 +119,7 @@ Het ontwerp gebruikt:
 
 ## Opmerkingen!:
 ### Kalibratie:
-De sensor kalibreert zichzelf als hij actief is, maar heeft geen intern geheugen om die kalibratie op te slaan. Dus als je het toestel even uit de voeding haalt zal hij opnieuw gedurende een 30minuten moeten kalibreren alvorens de metingen terug accuraat zijn. Laat het toestel dan ook liefst altijd in steken met een stopcontact voeding of neem de sensor gedurende minstens een half uur mee buiten als je hem in een powerbank inplugt.
+De sensor kalibreert zichzelf als hij actief is, maar heeft geen intern geheugen om die kalibratie op te slaan. Dus als je het toestel even uit de voeding haalt zal hij opnieuw gedurende een 30 minuten tot 1 dag moeten kalibreren alvorens de metingen terug accuraat zijn. Laat het toestel dan ook liefst altijd in steken met een stopcontact voeding of neem de sensor gedurende minstens een half uur mee buiten als je hem in een powerbank inplugt.
 ### Plaatsing:
 De sensor werkt het beste als deze centraal in een kamer is geplaatst, maar niet te dicht bij ademende mensen. Zodoende adviseren we hem een meter van personen te plaatsen en niet plat tegen een muur of plat op tafel te leggen. Tjilp is gemaakt om op een powerbank te zitten en zodoende komt hij rechtop in het midden van een tafel te staan. 
 ### Kostprijs:
@@ -124,7 +134,8 @@ Tot onze spijt is dit moeilijk aangezien we als Universiteit geen commerciële o
 ## Winkelmandje:
 Onderdeel|Prijs|Aantal.|Url
 ---|---|---|---
-Xiao (main controller)|€ 6.5|1|https://www.tinytronics.nl/shop/nl/platforms/seeed-studio/seeed-studio-seeeduino-xiao-cortex-m0-samd21
+Xiao (main controller)|€ 6.5|1|https://www.tinytronics.nl/shop/nl/development-boards/microcontroller-boards/overige/seeed-studio-seeeduino-xiao-cortex-m0-samd21-losse-headers
+Oled scherm|€ 6.5|1|https://www.tinytronics.nl/shop/nl/displays/oled/0.91-inch-oled-display-128*32-pixels-wit-i2c
 MH-Z19B (Co2 sensor)|€ 20.0|1|https://www.tinytronics.nl/shop/nl/sensoren/temperatuur-lucht-vochtigheid/winsen-mh-z19b-co2-sensor-met-kabel
 Passive Buzzer|€ 0.3|1|https://www.tinytronics.nl/shop/nl/audio/speakers/passieve-buzzer-3-12v-ac-2khz
 LED strip*|€ 12.0 of €0.2/st|1|https://www.tinytronics.nl/shop/nl/verlichting/led-strips/led-strips/ws2812b-digitale-5050-rgb-led-strip-60-leds-1m
