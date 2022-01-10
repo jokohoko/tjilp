@@ -14,6 +14,9 @@ To keep the interaction fun, tjilp will also vocalise his presence at random mom
 So only be alarmed when he goes into a frantic tjilping mode.
 
 ![cover](https://user-images.githubusercontent.com/6534647/131702248-194a2dbb-77b2-4fdb-96d7-ddfe76f4da79.jpg)
+Old design
+![image](https://user-images.githubusercontent.com/6534647/148764552-94da2f55-34cb-4b70-9862-3d7a841eb84d.png)
+New, bigger design
 
 The design uses:
 - A very small Seeed Xiao processor (a compact Arduino compatible module).
@@ -98,6 +101,9 @@ Het toestel is ontwikkeld met de koolmijnen in het achterhoofd. Daar namen de mi
 Om de interactie luchtig te houden zal Tjilp ook op random momenten even tjilpen ter indicatie dat hij leeft zoals een echte vogel. Dus wees enkel gealarmeerd als hij intensief gaat tjilpen.
 
 ![cover](https://user-images.githubusercontent.com/6534647/131702248-194a2dbb-77b2-4fdb-96d7-ddfe76f4da79.jpg)
+Old design
+![image](https://user-images.githubusercontent.com/6534647/148764552-94da2f55-34cb-4b70-9862-3d7a841eb84d.png)
+New, bigger design
 
 Het ontwerp gebruikt:
 - Een heel kleine Seeed Xiao processor (een van de meest compacte Arduino compatibele modules).
