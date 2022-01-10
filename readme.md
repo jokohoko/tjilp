@@ -20,6 +20,7 @@ New, bigger design
 
 The design uses:
 - A very small Seeed Xiao processor (a compact Arduino compatible module).
+- An 128 x 32 pixels Oled screen
 - An MH-Z19b module (a fairly precise and easy to use Arduino compatible co2 sensor).
 - A neopixel (ws2812b) piece of led strip.
 - A piezo buzzer (both active and passive would work, but active ones would be adviced).
@@ -107,6 +108,7 @@ New, bigger design
 
 Het ontwerp gebruikt:
 - Een heel kleine Seeed Xiao processor (een van de meest compacte Arduino compatibele modules).
+- Eenn 128 x 32 pixels Oled schermpje
 - Een MH-Z19b module (een behoorlijk accurate, goedkope en eenvoudig te gebruiken CO2 sensor).
 - Een Neopixel (ws2812b) om licht te geven.
 - Een piezo buzzer (actief of passief werken beiden, maar een passieve het beste).
