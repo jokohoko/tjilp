@@ -98,7 +98,7 @@ void silent_mode() {
 }
 
 void loop() {
-  for (int t = 0; t < random(600, 1500); t++) {
+  for (int t = 0; t < random(300, 900); t++) {
     // We take a reading every 2 sec
     co2 = get_co2_measurement();
     check_max_value(co2);
